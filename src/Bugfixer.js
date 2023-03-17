@@ -1,28 +1,11 @@
 import React from 'react';
 import {
-  ChakraProvider,
-  Box,
   Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  Heading,
   Flex,
   Spacer,
   Textarea,
-  HStack,
-  Center,
-  Button,
-  Select,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Input,
 } from '@chakra-ui/react';
-
-import axios from 'axios';
 
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';

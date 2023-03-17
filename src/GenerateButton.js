@@ -15,18 +15,26 @@ function GenerateButton(props) {
 
         let generatePrompt = async () => {
 
-            const response = await axios.post('https://api.openai.com/v1/completions', {
-            "model": props.model_name,
-            "prompt": props.request_prompt,
-            "max_tokens": 1024,
-            "temperature": 0.3,
-            "stop": props.stop
-            }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem("OPENAI_API_KEY")
-            }
-            })
+            const response = await axios.post(
+                props.model_name.includes("edit") ? 'https://api.openai.com/v1/' + 'edits' : 'https://api.openai.com/v1/' + 'completions', 
+
+                props.model_name.includes("edit") ? {
+                    "model": props.model_name,
+                    "input": props.request_prompt,
+                    "instruction": props.instruction,
+                } : {
+                    "model": props.model_name,
+                    "prompt": props.request_prompt,
+                    "max_tokens": 1024,
+                    "temperature": 0.3,
+                    "stop": props.stop
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("OPENAI_API_KEY")
+                    }
+                }
+            )
 
             return response.data.choices[0].text.trim()
         }

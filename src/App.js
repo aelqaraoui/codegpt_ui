@@ -3,26 +3,19 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Link,
-  VStack,
-  Code,
   Grid,
   Heading,
   Flex,
-  Spacer,
-  Textarea,
-  HStack,
-  Center,
   Button,
   Select,
   useDisclosure,
 } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react'
-import Fonts from './Fonts'
 import Boilerplate from './Boilerplate';
 import Bugfixer from './Bugfixer';
 import Translator from './Translator';
 import Keys from "./Keys"
+import CodeEdit from './CodeEdit';
 
 const theme = extendTheme({
   styles: {
@@ -79,6 +72,7 @@ function App() {
           <option value='boilerplate'>BOILERPLATE</option>
           <option value='bugfixer'>BUG FIXER</option>
           <option value='translator'>TRANSLATOR</option>
+          <option value='codeeditor'>CODE EDITOR</option>
         </Select>
         <Flex bg='black'  marginLeft="50%">
           <Text>OpenAI API Key :&nbsp;</Text>
@@ -95,6 +89,8 @@ function App() {
             return (<Bugfixer></Bugfixer>)
           } else if (template == 'translator') {
             return (<Translator></Translator>)
+          } else if (template == 'codeeditor') {
+            return (<CodeEdit></CodeEdit>)
           } 
         })()
       }
