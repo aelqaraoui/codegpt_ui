@@ -1,104 +1,55 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {
-  ChakraProvider,
-  Box,
-  Text,
-  Grid,
-  Heading,
-  Flex,
-  Button,
-  Select,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { extendTheme } from '@chakra-ui/react'
-import Boilerplate from './Boilerplate';
-import Bugfixer from './Bugfixer';
-import Translator from './Translator';
-import Keys from "./Keys"
-import CodeEdit from './CodeEdit';
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        bg: 'black',
-        color: 'white',
-  
-      },
-    },
-    components: {
-      Modal: {
-        baseStyle: (props) => ({
-          dialog: {
-            bg: "black",
-            color: "white",
-          }
-        })
-      }
-    }
-  },
-  fonts: {
-    heading: `'AldotheApache', sans-serif`,
-    body: `'AldotheApache', sans-serif`,
-    Textarea: `'SpaceGrotesk', sans-serif`,
-  },
-})
+import ReactGA from 'react-ga';
 
-function App() {
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import ActualApp from "./pages/ActualApp";
 
-  let [template, setTemplate] = React.useState('boilerplate')
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  function swicthTemplate(e) {
-    let inputValue = e.target.value
-    setTemplate(inputValue)
-  }
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDJg5tWD_H920aRxDLTbCqgEPHp2vcxIR0",
+  authDomain: "codegpt-fdbe3.firebaseapp.com",
+  projectId: "codegpt-fdbe3",
+  storageBucket: "codegpt-fdbe3.appspot.com",
+  messagingSenderId: "627192950526",
+  appId: "1:627192950526:web:499a4563aad82cf5e03faf",
+  measurementId: "G-4MY6M57ZBD"
+};
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+ReactGA.initialize("G-4MY6M57ZBD");
 
-  function onOpenAPIChange(e) {
-    localStorage.setItem("OPENAI_API_KEY", document.getElementsByClassName("openaiapikey")[0].value);
-    onClose()
-    window.location.reload() 
-  }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+export default function App() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
-    <ChakraProvider theme={theme}>
-      
-      <Grid templateColumns='repeat(3, 1fr)' gap={6} minWidth='max-content' alignItems='center' m="50px">
-        <Box fontSize="xl">
-          <Heading as='h1' size='3xl'>CODEGPT</Heading>
-        </Box>
-        <Select width='150px' marginLeft="30%" onChange={swicthTemplate} value={template}>
-          <option value='boilerplate'>BOILERPLATE</option>
-          <option value='bugfixer'>BUG FIXER</option>
-          <option value='translator'>TRANSLATOR</option>
-          <option value='codeeditor'>CODE EDITOR</option>
-        </Select>
-        <Flex bg='black'  marginLeft="50%">
-          <Text>OpenAI API Key :&nbsp;</Text>
-          <Button height='24px' bgColor='black' border='2px solid white' onClick={onOpen}>sk-***</Button>
-          <Keys isOpen={isOpen || !localStorage.getItem("OPENAI_API_KEY")} onOpen={onOpen} onClose={onOpenAPIChange}></Keys>
-        </Flex>
-      </Grid>
-
-      {
-        (() => {
-          if(template == 'boilerplate') {
-            return (<Boilerplate></Boilerplate>)
-          } else if (template == 'bugfixer') {
-            return (<Bugfixer></Bugfixer>)
-          } else if (template == 'translator') {
-            return (<Translator></Translator>)
-          } else if (template == 'codeeditor') {
-            return (<CodeEdit></CodeEdit>)
-          } 
-        })()
-      }
-
-      
-
-    </ChakraProvider>
+      <Router>
+          <Routes>
+              <Route path="/" element={<Home/>} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="/login" element={<Login/>} />
+              <Route path="/app" element={<ActualApp/>} />
+        </Routes>
+    </Router>
   );
 }
-
-export default App;
