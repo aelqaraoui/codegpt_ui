@@ -9,7 +9,7 @@ import {
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';
 
-function Boilerplate() {
+function Boilerplate(props) {
 
   let [error, setError] = React.useState({
     display: "none",
@@ -41,6 +41,7 @@ function Boilerplate() {
                 width='500px'
                 height='300px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             </div>
             <Spacer />
@@ -53,6 +54,7 @@ function Boilerplate() {
                 width='500px'
                 height='300px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             </div>
         </Flex>
@@ -63,6 +65,8 @@ function Boilerplate() {
             stop={["\n\n#\n\n"]} 
             setResult={setCode}
             setError={setError}
+            user_uid={props.user_uid}
+            updateRequests={props.updateRequests}
           />
 
         <ErrorFooter error={error}></ErrorFooter>

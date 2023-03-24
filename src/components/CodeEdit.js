@@ -10,7 +10,7 @@ import {
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';
 
-function CodeEdit() {
+function CodeEdit(props) {
 
   let [error, setError] = React.useState({
     display: "none",
@@ -49,6 +49,7 @@ function CodeEdit() {
                 width='500px'
                 height='180px'
                 fontFamily='SpaceGrotesk'
+                border='2px solid black'
             />
             <Text mt='8px' mb='8px'>Instruction :</Text>
             <Textarea
@@ -58,6 +59,7 @@ function CodeEdit() {
                 width='500px'
                 height='80px'
                 fontFamily='SpaceGrotesk'
+                border='2px solid black'
             />
             </div>
             <Spacer />
@@ -70,16 +72,18 @@ function CodeEdit() {
                 width='500px'
                 height='300px'
                 fontFamily='SpaceGrotesk'
+                border='2px solid black'
             />
             </div>
         </Flex>
 
         <GenerateButton 
-            model_name="code-davinci-edit-001"
+            model_name="text-davinci-003"
             request_prompt={input} 
             instruction={instruction}
             setResult={setOutput}
             setError={setError}
+            user_uid={props.user_uid}
           />
 
         <ErrorFooter error={error}></ErrorFooter> 

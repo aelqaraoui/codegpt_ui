@@ -10,7 +10,7 @@ import {
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';
 
-function Bugfixer() {
+function Bugfixer(props) {
 
   let [error, setError] = React.useState({
     display: "none",
@@ -43,7 +43,12 @@ function Bugfixer() {
             <div height='500px'>
             <Flex mb='8px'>
                 <Text>Language : &nbsp;</Text>
-                <Input value={language} height='24px' width='150px' onChange={handleLanguageChange}/>
+                <Input 
+                  value={language} 
+                  height='24px' 
+                  width='150px' 
+                  onChange={handleLanguageChange}
+                  border='2px solid black'/>
             </Flex>
             <Text mb='8px'>Buggy {language} :</Text>
             <Textarea
@@ -53,6 +58,7 @@ function Bugfixer() {
                 width='500px'
                 height='268px'
                 fontFamily='SpaceGrotesk'
+                border='2px solid black'
             />
             </div>
             <Spacer />
@@ -65,16 +71,18 @@ function Bugfixer() {
                 width='500px'
                 height='300px'
                 fontFamily='SpaceGrotesk'
+                border='2px solid black'
             />
             </div>
         </Flex>
 
         <GenerateButton 
-            model_name="code-davinci-002"
-            request_prompt={"##### Fix bugs in the code below\n\n### Buggy " + language + "\n" + buggy + "### Fixed " + language} 
+            model_name="text-davinci-003"
+            request_prompt={"##### Fix bugs in the code below\n\n### Buggy " + language + "\n" + buggy + "\n### Fixed " + language} 
             stop={["###"]} 
             setResult={setFixed}
             setError={setError}
+            user_uid={props.user_uid}
           />
 
         <ErrorFooter error={error}></ErrorFooter> 

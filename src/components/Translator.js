@@ -10,7 +10,7 @@ import {
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';
 
-function Translator() {
+function Translator(props) {
 
   let [error, setError] = React.useState({
     display: "none",
@@ -51,9 +51,21 @@ function Translator() {
             
             <Flex mb='8px'>
                 <Text>From &nbsp;</Text>
-                <Input value={from} height='24px' width='150px' onChange={handleFromChange}/>
+                <Input 
+                  value={from} 
+                  height='24px' 
+                  width='150px' 
+                  border='2px solid black'
+                  onChange={handleFromChange}
+                  />
                 <Text>&nbsp;to&nbsp;</Text>
-                <Input value={to} height='24px' width='150px' onChange={handleToChange} />
+                <Input 
+                  value={to} 
+                  height='24px' 
+                  width='150px' 
+                  border='2px solid black'
+                  onChange={handleToChange} 
+                  />
                 <Text>&nbsp;: </Text>
             </Flex>
             <Text mb='8px'>{from}: </Text>
@@ -64,6 +76,7 @@ function Translator() {
                 width='500px'
                 height='268px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             
             </div>
@@ -77,16 +90,18 @@ function Translator() {
                 width='500px'
                 height='300px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             </div>
         </Flex>
 
         <GenerateButton 
-            model_name="code-davinci-002" 
+            model_name="text-davinci-003" 
             request_prompt={"#" + from + " to " + to + ":\n" + from + ":\n" + prompt + "\n\n" + to + ":"} 
             stop={["\n\n\n"]} 
             setResult={setCode}
             setError={setError}
+            user_uid={props.user_uid}
           />
 
           <ErrorFooter error={error}></ErrorFooter> 

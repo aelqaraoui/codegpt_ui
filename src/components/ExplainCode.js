@@ -9,7 +9,7 @@ import {
 import GenerateButton from './GenerateButton';
 import ErrorFooter from './ErrorFooter';
 
-function ExplainCode() {
+function ExplainCode(props) {
 
   let [error, setError] = React.useState({
     display: "none",
@@ -41,6 +41,7 @@ function ExplainCode() {
                 width='500px'
                 height='300px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             </div>
             <Spacer />
@@ -53,16 +54,18 @@ function ExplainCode() {
                 width='500px'
                 height='300px'
                 fontFamily='sans-serif'
+                border='2px solid black'
             />
             </div>
         </Flex>
 
         <GenerateButton 
-            model_name="code-davinci-002" 
+            model_name="text-davinci-003" 
             request_prompt={prompt + "\n\"\"\"\nHere's what the above class is doing:\n"} 
             stop={["\"\"\""]} 
             setResult={setCode}
             setError={setError}
+            user_uid={props.user_uid}
           />
 
         <ErrorFooter error={error}></ErrorFooter>

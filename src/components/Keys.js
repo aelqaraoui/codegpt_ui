@@ -24,16 +24,16 @@ function Keys(props) {
   return (
       <Modal isOpen={props.isOpen} onClose={props.onClose} isCentered>
         <ModalOverlay />
-        <ModalContent bg='white' color='black'>
+        <ModalContent bg='black' color='white'>
           <ModalHeader>All the keys are stored in the browser</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text>OpenAI API Key :</Text>
-            <Input className='openaiapikey' border='2px solid black' value={value} onChange={handleValueChange}></Input>
+            <Input className='openaiapikey' border='2px solid white' value={value} onChange={handleValueChange}></Input>
           </ModalBody>
 
           <ModalFooter>
-            <Button bg='white' border='2px solid black' mr={3} onClick={props.onClose}>
+            <Button bg='black' border='2px solid white' mr={3} onClick={props.onClose}>
               Save
             </Button>
           </ModalFooter>

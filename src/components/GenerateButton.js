@@ -6,7 +6,40 @@ import {
 
 import axios from 'axios';
 
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDJg5tWD_H920aRxDLTbCqgEPHp2vcxIR0",
+  authDomain: "codegpt-fdbe3.firebaseapp.com",
+  projectId: "codegpt-fdbe3",
+  storageBucket: "codegpt-fdbe3.appspot.com",
+  messagingSenderId: "627192950526",
+  appId: "1:627192950526:web:499a4563aad82cf5e03faf",
+  measurementId: "G-4MY6M57ZBD"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 function GenerateButton(props) {
+
+    let logRequest = async (user_id) => {
+        try {
+          const docRef = await addDoc(collection(db, "requests"), {
+            user_id: user_id,
+            timestamp: new Date(),
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+    }
 
     let [loading, setLoading] = React.useState(false)
 
@@ -41,6 +74,9 @@ function GenerateButton(props) {
 
         generatePrompt().then((result) => {
             props.setResult(result)
+        }).then(() => {
+            logRequest(props.user_uid)
+            props.updateRequests()
         }).catch((e) => {
             console.log(e)
             setLoading(false)
@@ -59,13 +95,13 @@ function GenerateButton(props) {
     if(loading) {
         return (
             <Center m='50px'>
-                <Button isLoading bgColor='black' border='2px solid white' onClick={onGenerate}>Generate</Button>
+                <Button isLoading bgColor='white' border='2px solid black' onClick={onGenerate}>Generate</Button>
             </Center>
         )
         } else {
         return (
             <Center m='50px'>
-                <Button bgColor='black' border='2px solid white' onClick={onGenerate}>Generate</Button>
+                <Button bgColor='white' border='2px solid black' onClick={onGenerate}>Generate</Button>
             </Center>
         )
     }
