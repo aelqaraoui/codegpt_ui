@@ -19,8 +19,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'black',
-        color: 'white',
+        bg: 'white',
+        color: 'black',
   
       },
     },
@@ -28,8 +28,8 @@ const theme = extendTheme({
       Modal: {
         baseStyle: (props) => ({
           dialog: {
-            bg: "black",
-            color: "white",
+            bg: "white",
+            color: "black",
           }
         })
       }
@@ -58,13 +58,13 @@ function Home() {
         </Center>
         <Center mt='7rem'>
             <Flex>
-                <Button bgColor='black' border='2px solid white' ml='1em' onClick={
+                <Button bgColor='white' border='2px solid black' ml='1em' onClick={
                   (e) => {
                     e.preventDefault();
                     window.location.href='/login';
                   }
                 }>LOGIN</Button>
-                <Button bgColor='black' border='2px solid white' ml='1em' onClick={
+                <Button bgColor='white' border='2px solid black' ml='1em' onClick={
                   (e) => {
                     e.preventDefault();
                     window.location.href='/register';
