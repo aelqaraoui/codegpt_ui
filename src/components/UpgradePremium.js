@@ -31,7 +31,7 @@ function UpgradePremium(props) {
           </ModalBody>
 
           <ModalFooter  textAlign='center' alignContent='center'>
-            <form action='http://localhost:4242/create-checkout-session' method='POST'>
+            <form action='http://67.207.94.192:4242/create-checkout-session' method='POST'>
               <Button type='submit' bg='black' border='2px solid white' mr={3} onClick={props.onClose}>
                 Buy Now
               </Button>
