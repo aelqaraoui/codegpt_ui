@@ -5,7 +5,7 @@ const Fonts = () => (
     styles={`
       @font-face {
         font-family: 'AldotheApache';
-        src: url('./fonts/AldotheApache.ttf');
+        src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,100&display=swap');
       }
 
       @font-face {

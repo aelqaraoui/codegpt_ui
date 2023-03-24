@@ -25,6 +25,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import UpgradePremium from '../components/UpgradePremium';
+import Fonts from '../components/Fonts';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -174,6 +175,7 @@ function ActualApp() {
 
     return (
       <ChakraProvider theme={theme}>
+          <Fonts />
           <Center>
               <Heading as='h1' size='3xl' mt="2em" mb="5rem">CODEGPT</Heading>
           </Center>
@@ -197,8 +199,6 @@ function ActualApp() {
       </ChakraProvider>
     );
   } else if(show) {
-
-    console.log("TRUTH", requests, payments)
 
     return (
       <ChakraProvider theme={theme}>
