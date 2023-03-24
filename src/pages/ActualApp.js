@@ -202,6 +202,7 @@ function ActualApp() {
 
     return (
       <ChakraProvider theme={theme}>
+        <Fonts />
         <UpgradePremium isOpen={(requests >= 10) || (payments < 1)}></UpgradePremium>
         <div max-width='400px' margin="0 auto">
           <Grid templateColumns='repeat(3, 1fr)' gap={6} minWidth='max-content' alignItems='center' m="50px">

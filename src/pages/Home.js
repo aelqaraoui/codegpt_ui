@@ -13,6 +13,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react'
+import Fonts from '../components/Fonts';
 
 const theme = extendTheme({
   styles: {
@@ -45,6 +46,7 @@ function Home() {
 
   return (
     <ChakraProvider theme={theme}>
+        <Fonts />
         <Center>
             <Heading as='h1' size='3xl' mt="2em">CODEGPT</Heading>
         </Center>

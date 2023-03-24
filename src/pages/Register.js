@@ -18,6 +18,7 @@ import {
 import { Field, Form, Formik } from 'formik';
 import { extendTheme } from '@chakra-ui/react'
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import Fonts from '../components/Fonts';
 
 const theme = extendTheme({
   styles: {
@@ -66,6 +67,7 @@ function Register() {
 
     return (
       <ChakraProvider theme={theme}>
+        <Fonts />
           <Center>
               <Heading as='h1' size='3xl' mt="2em" mb="5rem">CODEGPT</Heading>
           </Center>
